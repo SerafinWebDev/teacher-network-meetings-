@@ -2,6 +2,17 @@ import { MySQLqueryToDatabase } from "@/services/connector";
 
 export const revalidate = 3600; // revalidate the data at most every hour
 
+type meeting = {
+  id: string;
+  cmsid: string;
+  u_title: string;
+  to_at: string;
+  from_at: string;
+  join_to: string;
+  slug: string;
+  linkUrl: string;
+};
+
 export default async function Home() {
   const item = await MySQLqueryToDatabase(
     `SELECT * FROM app_basic_training_units WHERE u_type = 'ssnid'; `
@@ -10,15 +21,15 @@ export default async function Home() {
   const dataObj = JSON.parse(item);
 
   const list = dataObj.rows;
-  const rowsToShow = [];
+  const rowsToShow: meeting[] = [];
   const now = Date.now();
 
-  const formatDate = (date:Date) => {
+  const formatDate = (date: Date) => {
     const value = date.toLocaleString("pl");
     return value.substring(0, value.length - 3); //.toLocaleDateString();
   };
 
-  list.forEach((meet) => {
+  list.forEach((meet: meeting) => {
     const tmieTo = new Date(meet.to_at);
 
     const maxShow = tmieTo.getTime();
@@ -33,7 +44,10 @@ export default async function Home() {
 
   const meetingToShow = rowsToShow.map((el) => {
     return (
-      <div className="bordered-card btu_card w-full " key={`siec-n-i-d-${el.id}`}>
+      <div
+        className="bordered-card btu_card w-full "
+        key={`siec-n-i-d-${el.id}`}
+      >
         <div className="column2 w-full flex flex-wrap">
           <div className="content">
             <h2>{el.u_title}</h2>
