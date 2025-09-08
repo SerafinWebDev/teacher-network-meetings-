@@ -33,7 +33,7 @@ export default async function Home() {
 
   const meetingToShow = rowsToShow.map((el) => {
     return (
-      <div className="bordered-card btu_card w-full ">
+      <div className="bordered-card btu_card w-full " key={`siec-n-i-d-${el.id}`}>
         <div className="column2 w-full flex flex-wrap">
           <div className="content">
             <h2>{el.u_title}</h2>
