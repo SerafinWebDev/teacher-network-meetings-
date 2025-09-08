@@ -26,8 +26,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-.btu_card, .trainer-card {
+.btu_card,
+.trainer-card {
   align-items: stretch;
   display: flex;
   border: 2px solid var(--color-primary-bor);
@@ -40,15 +40,18 @@ body {
   padding: 16px;
 }
 
-.buttons-container{
+.buttons-container {
   width: 15%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
-.content{
+.content {
   width: 85%;
-  min-width:240px
+  min-width: 240px;
 }
 
-.button{
+.button {
   background-color: var(--color-primary-bor);
   border: 1px solid var(--color-primary-bor);
   border-radius: 8px;
@@ -56,9 +59,11 @@ body {
   padding: 10px;
   text-align: center;
   color: #fff;
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-weight: 700;
   line-height: 1rem;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
+  height: 38px;
 }

@@ -7,18 +7,14 @@ export default async function Home() {
     `SELECT * FROM app_basic_training_units WHERE u_type = 'ssnid'; `
   );
 
-
   const dataObj = JSON.parse(item);
-  console.log(dataObj.rows);
 
   const list = dataObj.rows;
   const rowsToShow = [];
-
   const now = Date.now();
 
   const formatDate = (date) => {
-
-    return date.toLocaleDateString()
+    return date.toLocaleDateString();
   }
 
 
@@ -35,6 +31,7 @@ export default async function Home() {
 
       meet.join_to = formatDate(new Date(meet.join_to))
       meet.from_at = formatDate(new Date(meet.from_at))
+      meet.linkUrl = `https://www.womkat.edu.pl/sieci-nauczycieli-i-dyrektorow/szczegoly,${meet.slug},${meet.cmsid}`
       rowsToShow.push(meet);
       console.log(meet.u_title);
     }
@@ -70,7 +67,7 @@ export default async function Home() {
             {el.slug ? (
               <a
                 className="button"
-                href={`https://www.womkat.edu.pl/${el.slug}`}
+                href={el.linkUrl}
                 target="_top"
               >
                 Więcej
@@ -86,9 +83,9 @@ export default async function Home() {
 
   return (
     <div className=" min-h-screen p-8 pb-20 sm:p-20 min-w-screen ">
-      {/* < className="flex gap-[32px] items-center w-full">
+      <main className="flex gap-[32px] items-center w-full">
         {JSON.stringify(rowsToShow[0])}
-      </main> */}
+      </main>
       <main className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         {meetingToShow}
       </main>
