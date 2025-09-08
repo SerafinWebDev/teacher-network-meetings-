@@ -14,11 +14,11 @@ export default async function Home() {
   const now = Date.now();
 
   const formatDate = (date:Date) => {
-    let value = date.toLocaleString("pl");
+    const value = date.toLocaleString("pl");
     return value.substring(0, value.length - 3); //.toLocaleDateString();
   };
 
-  list.forEach((meet:any) => {
+  list.forEach((meet) => {
     const tmieTo = new Date(meet.to_at);
 
     const maxShow = tmieTo.getTime();
@@ -33,7 +33,7 @@ export default async function Home() {
 
   const meetingToShow = rowsToShow.map((el) => {
     return (
-      <div className="bordered-card btu_card w-full">
+      <div className="bordered-card btu_card w-full ">
         <div className="column2 w-full flex flex-wrap">
           <div className="content">
             <h2>{el.u_title}</h2>
