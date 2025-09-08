@@ -10,30 +10,24 @@ export default async function Home() {
   const dataObj = JSON.parse(item);
 
   const list = dataObj.rows;
-  const rowsToShow = [];
+  const rowsToShow:any[] = [];
   const now = Date.now();
 
-  const formatDate = (date) => {
-    return date.toLocaleDateString();
-  }
+  const formatDate = (date:Date) => {
+    let value = date.toLocaleString("pl");
+    return value.substring(0, value.length - 3); //.toLocaleDateString();
+  };
 
-
-  list.forEach((meet) => {
+  list.forEach((meet:any) => {
     const tmieTo = new Date(meet.to_at);
 
     const maxShow = tmieTo.getTime();
-
-
-
-
-    console.log(maxShow);
     if (maxShow >= now) {
-
-      meet.join_to = formatDate(new Date(meet.join_to))
-      meet.from_at = formatDate(new Date(meet.from_at))
-      meet.linkUrl = `https://www.womkat.edu.pl/sieci-nauczycieli-i-dyrektorow/szczegoly,${meet.slug},${meet.cmsid}`
+      meet.join_to = formatDate(new Date(meet.join_to));
+      meet.from_at = formatDate(new Date(meet.from_at));
+      meet.to_at = formatDate(new Date(meet.to_at));
+      meet.linkUrl = `https://www.womkat.edu.pl/sieci-nauczycieli-i-dyrektorow/szczegoly,${meet.slug},${meet.cmsid}`;
       rowsToShow.push(meet);
-      console.log(meet.u_title);
     }
   });
 
@@ -44,11 +38,16 @@ export default async function Home() {
           <div className="content">
             <h2>{el.u_title}</h2>
             <div className="flexbox">
-              <div className="col">
-                <h4>Data: {el.from_at} </h4>
+              <div className="col mt-2">
+                <h4>
+                  Data: <span className="redText">{el.from_at}</span>{" "}
+                </h4>
               </div>
-              <div className="col">
-                <h4>Data nadsyłania zgłoszeń: {el.join_to}</h4>
+              <div className="col mt-2">
+                <h4>
+                  Data nadsyłania zgłoszeń:{" "}
+                  <span className="redText">{el.join_to}</span>
+                </h4>
               </div>
             </div>
             <div className="col">
@@ -65,11 +64,7 @@ export default async function Home() {
           </div>
           <div className="buttons-container">
             {el.slug ? (
-              <a
-                className="button"
-                href={el.linkUrl}
-                target="_top"
-              >
+              <a className="button" href={el.linkUrl} target="_top">
                 Więcej
               </a>
             ) : (
@@ -82,10 +77,7 @@ export default async function Home() {
   });
 
   return (
-    <div className=" min-h-screen p-8 pb-20 sm:p-20 min-w-screen ">
-      <main className="flex gap-[32px] items-center w-full">
-        {JSON.stringify(rowsToShow[0])}
-      </main>
+    <div className="min-h-full p-8 pb-20 sm:p-20 min-w-full ">
       <main className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         {meetingToShow}
       </main>
