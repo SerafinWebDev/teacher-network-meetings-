@@ -50,7 +50,7 @@ export default async function Home() {
       >
         <div className="column2 w-full flex flex-wrap">
           <div className="content">
-            <h2>{el.u_title}</h2>
+            <h2 className="w-[80%]">{el.u_title}</h2>
             <div className="flexbox">
               <div className="col mt-2">
                 <h4>
