@@ -10,7 +10,7 @@ export default async function Home() {
   const dataObj = JSON.parse(item);
 
   const list = dataObj.rows;
-  const rowsToShow:any[] = [];
+  const rowsToShow = [];
   const now = Date.now();
 
   const formatDate = (date:Date) => {
