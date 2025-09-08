@@ -1,9 +1,5 @@
 import mysql, { FieldPacket, RowDataPacket } from "mysql2/promise";
 
-
-
-
-
 const newDig = {
   host: process.env.DB_ND_DATA_HOST,
   port: Number(process.env.DB_ND_DATA_PORT),
